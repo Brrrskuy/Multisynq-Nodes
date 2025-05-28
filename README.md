@@ -67,9 +67,15 @@ Input code: `drinktheblue`
   ```
   sudo ufw allow 3000/tcp
   ```
+  ## Create Screen ##
+  ```
+  screen -S multisynq
+  ```
   ```
   synchronize web
   ```
+  Detached from screen `CTRL+A+D`
+  
   ## Access your IP VPS
   ```
   http://<YOUR_VPS_IP>:3000
