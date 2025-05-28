@@ -1,1 +1,86 @@
-# Multisynq-Nodes
+# Multisynq Synqchronizer Nodes
+
+- Buy VPS di : [t.me/skuycloud](t.me/skuycloud)
+- Trakteer buat buy Kopi : https://trakteer.id/brrrskuy/tip `<---`
+
+## First Join : Connect Phantom Wallet ##
+`--->`[Join Multisynq Synqchronize Nodes in here](https://startsynqing.com/?ref=2746e7-ek7ufp)
+
+Input code: `drinktheblue`
+
+# 1. Install Docker & Dependencies
+  Install Packages
+  ```
+  sudo apt-get update && sudo apt-get upgrade -y && sudo apt install curl iptables build-essential git wget lz4 jq make gcc nano automake autoconf tmux htop nvme-cli libgbm1 pkg-config libssl-dev libleveldb-dev tar   clang bsdmainutils ncdu unzip -y
+  ```
+  Install Docker
+  ```
+  curl -fsSL https://get.docker.com | sh
+  ```
+# 2. Install Nodejs v20+
+  ```
+  curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - && sudo apt install -y nodejs
+  ```
+# 3. Install Synqchronize (Universal)
+  ```
+  npm install -g synqchronizer
+  ```
+-----------------------------------------------
+# 4. Check Package JSON
+  ```
+  cd $(npm root -g)/synqchronizer
+  cat package.json | jq .bin
+  ```
+  ```
+  cat /usr/lib/node_modules/synqchronizer/package.json | jq .bin
+  ```
+# 5. Configure Synchronize
+  ```
+  synchronize init
+  ```
+# 6. Running your Synchronize systemd Service
+  ```
+  synchronize service
+  ```
+  ## Copy Command Script in VPS ##
+  ```
+  sudo cp /root/.synchronizer-cli/synchronizer-cli.service /etc/systemd/system/
+  ```
+  ```
+  sudo systemctl daemon-reload
+  sudo systemctl enable synchronizer-cli
+  sudo systemctl start synchronizer-cli
+  ```
+  ## Check Status ##
+  ```
+  sudo systemctl status synchronizer-cli
+  ```
+## Or Rename file (Opsional) ##
+  ```
+  sudo mv /etc/systemd/system/synchronizer-cli.service /etc/systemd/system/synqchronizer-cli.service
+  sudo systemctl daemon-reload
+  sudo systemctl enable synqchronizer-cli
+  sudo systemctl start synqchronizer-cli
+  ```
+# 7. Access your Nodes in Website Synqchronizer Dashboard
+  ## Open Port Ufw ##
+  ```
+  sudo ufw allow 3000/tcp
+  ```
+  ```
+  synchronize web
+  ```
+  ## Access your IP VPS
+  ```
+  http://<YOUR_VPS_IP>:3000
+  ```
+# 8. Monitoring Status Synqchronizer
+  ```
+  sudo systemctl daemon-reload
+  sudo systemctl start synqchronizer-cli
+  sudo systemctl status synqchronizer-cli
+  ```
+  ## Check logs realtime for troubleshooting
+  ```
+  journalctl -u synqchronizer-cli -f
+  ```
