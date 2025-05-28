@@ -84,3 +84,5 @@ Input code: `drinktheblue`
   ```
   journalctl -u synqchronizer-cli -f
   ```
+# Discord Multisynq
+Join Discord Claim Roles : https://discord.gg/multisynq
