@@ -11,7 +11,7 @@ Input code: `drinktheblue`
 # 1. Install Docker & Dependencies
   Install Packages
   ```
-  sudo apt-get update && sudo apt-get upgrade -y && sudo apt install curl iptables build-essential git wget lz4 jq make gcc nano automake autoconf tmux htop nvme-cli libgbm1 pkg-config libssl-dev libleveldb-dev tar   clang bsdmainutils ncdu unzip -y
+  sudo apt-get update && sudo apt-get upgrade -y && sudo apt install curl iptables build-essential git wget lz4 jq make gcc nano automake autoconf tmux htop nvme-cli libgbm1 pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip -y
   ```
   Install Docker
   ```
@@ -23,14 +23,9 @@ Input code: `drinktheblue`
   ```
 # 3. Install Synqchronize (Universal)
   ```
-  npm install -g synqchronizer
+  npm install -g synchronizer-cli
   ```
------------------------------------------------
-# 4. Check Package JSON
-  ```
-  cd $(npm root -g)/synqchronizer
-  cat package.json | jq .bin
-  ```
+# 4. Check Package JSON (Optional)
   ```
   cat /usr/lib/node_modules/synqchronizer/package.json | jq .bin
   ```
@@ -55,14 +50,27 @@ Input code: `drinktheblue`
   ```
   sudo systemctl status synchronizer-cli
   ```
-## Or Rename file (Opsional) ##
+## Or Rename file (Optional) ##
   ```
   sudo mv /etc/systemd/system/synchronizer-cli.service /etc/systemd/system/synqchronizer-cli.service
   sudo systemctl daemon-reload
   sudo systemctl enable synqchronizer-cli
   sudo systemctl start synqchronizer-cli
   ```
-# 7. Access your Nodes in Website Synqchronizer Dashboard
+  Jika ada error dan belum connected , ganti file ini didalamnya
+  ```
+  sudo nano /etc/systemd/system/synchronizer-cli.service
+  ```
+  Ganti menjadi ini , sisanya biarkan
+  ```
+  ExecStart=/usr/bin/docker run --name synchronizer-cli-service --pull always --restart unless-stopped --platform linux/amd64 cdrakep/synqchronizer:latest --depin wss://api.multisynq.io/depin
+  ```
+  Setelah selesai coba reload systemd dan cek statusnya
+  ```
+  sudo systemctl daemon-reload
+  sudo systemctl restart synchronizer-cli
+  ```
+# 8. Access your Nodes in Website Synqchronizer Dashboard
   ## Open Port Ufw ##
   ```
   sudo ufw allow 3000/tcp
@@ -78,9 +86,9 @@ Input code: `drinktheblue`
   
   ## Access your IP VPS
   ```
-  http://<YOUR_VPS_IP>:3000
+  http://YOUR_VPS_IP:3000
   ```
-# 8. Monitoring Status Synqchronizer
+# 9. Monitoring Status Synqchronizer
   ```
   sudo systemctl daemon-reload
   sudo systemctl start synqchronizer-cli
